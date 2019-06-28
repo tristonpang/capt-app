@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Card, CardSection, Button } from '../common';
 
 class Announcements extends Component {
     render() {
         return (
-            <View>
-                <Text>Announcements</Text>
-            </View>
+            <Card>
+                <CardSection>
+                    <Button>Test</Button>
+                </CardSection>
+            </Card>
         );
     }
 }

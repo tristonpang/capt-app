@@ -3,6 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import AdminHome from './components/adminFlow/AdminHome';
 import Announcements from './components/mainFlow/Announcements';
+import AdminCreate from './components/adminFlow/AdminCreate';
 
 const RouterComponent = () => {
     return (
@@ -27,7 +28,14 @@ const RouterComponent = () => {
                         key='adminHome' 
                         component={AdminHome} 
                         title='Admin Functions' 
+                        rightTitle='Add'
+                        onRight={() => Actions.adminCreate()}
                         initial 
+                    />
+                    <Scene 
+                        key='adminCreate' 
+                        component={AdminCreate}
+                        title='Create Announcment'    
                     />
                 </Scene>
 

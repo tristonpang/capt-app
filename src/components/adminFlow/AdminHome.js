@@ -1,14 +1,34 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { FlatList } from 'react-native';
+import _ from 'lodash';
+import { adminListFetch } from '../../actions';
+import AdminListItem from './AdminListItem';
 
 class AdminHome extends Component {
+    componentDidMount() {
+        this.props.adminListFetch();
+    }
+
+    renderItem(announcementName) {
+        return <AdminListItem announcementName={announcementName} />
+    }
+
     render() {
         return (
-            <View>
-                <Text>Admin Home</Text>
-            </View>
+            <FlatList 
+                data={this.props.announcements}
+                renderItem={this.renderItem}
+                keyExtractor={announcementName => announcementName.toString()}
+            />
         );
     }
 }
 
-export default AdminHome;
+const mapStateToProps = (state) => {
+    const announcements = _.map(state.adminAnnouncements, 
+        (val, announcementKey) => announcementKey);
+    return { announcements };
+};
+
+export default connect(mapStateToProps, { adminListFetch })(AdminHome);
