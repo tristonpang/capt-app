@@ -11,7 +11,7 @@ class AdminHome extends Component {
     }
 
     renderItem(announcementName) {
-        return <AdminListItem announcementName={announcementName} />
+        return <AdminListItem announcementName={announcementName} />;
     }
 
     render() {

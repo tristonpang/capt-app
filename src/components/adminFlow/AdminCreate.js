@@ -28,8 +28,8 @@ class AdminCreate extends Component {
                 <CardSection>
                     <Input 
                         label='Description'
-                        value={this.props.title}
-                        onChangeText={text => this.props.adminUpdate({ prop: 'Description', value: text })}
+                        value={this.props.description}
+                        onChangeText={text => this.props.adminUpdate({ prop: 'description', value: text })}
                     />
                 </CardSection>
 
