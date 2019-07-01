@@ -10,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADMIN_LIST_FETCH_SUCCESS:
             console.log(action.payload);
-            return action.payload;
+            return { announcements: action.payload };
         default:
             return state;
     }

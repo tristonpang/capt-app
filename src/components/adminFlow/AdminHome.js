@@ -10,8 +10,8 @@ class AdminHome extends Component {
         this.props.adminListFetch();
     }
 
-    renderItem(announcementName) {
-        return <AdminListItem announcementName={announcementName} />;
+    renderItem(announcement) {
+        return <AdminListItem announcement={announcement} />;
     }
 
     render() {
@@ -19,15 +19,15 @@ class AdminHome extends Component {
             <FlatList 
                 data={this.props.announcements}
                 renderItem={this.renderItem}
-                keyExtractor={announcementName => announcementName.toString()}
+                keyExtractor={announcement => announcement.title.toString()}
             />
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    const announcements = _.map(state.adminAnnouncements, 
-        (val, announcementKey) => announcementKey);
+    const { announcements } = state.adminAnnouncements;
+
     return { announcements };
 };
 

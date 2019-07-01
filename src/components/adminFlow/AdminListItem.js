@@ -7,12 +7,12 @@ import { CardSection } from '../common';
 class AdminListItem extends Component {
 
     render() {
-        console.log(this.props.announcementName);
+        console.log(this.props.announcement);
         return (
             <View>
                 <CardSection>
                     <Text style={styles.titleStyle}>
-                        {this.props.announcementName.item}
+                        {this.props.announcement.item.title}
                     </Text>
                 </CardSection>
             </View>

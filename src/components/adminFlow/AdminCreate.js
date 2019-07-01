@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Switch } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button, ToggleInput } from '../common';
 import { adminUpdate, adminCreate } from '../../actions';
