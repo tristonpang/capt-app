@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
+import { Switch } from 'react-native';
 import { connect } from 'react-redux';
-import { Card, CardSection, Input, Button } from '../common';
+import { Card, CardSection, Input, Button, ToggleInput } from '../common';
 import { adminUpdate, adminCreate } from '../../actions';
 
 class AdminCreate extends Component {
     componentDidMount() {
         this.props.adminUpdate({ prop: 'title', value: '' });
         this.props.adminUpdate({ prop: 'description', value: '' });
+        this.props.adminUpdate({ prop: 'isEvent', value: false });
+        this.props.adminUpdate({ prop: 'isActive', value: true });
     }
 
     onButtonPress() {
-        const { title, description } = this.props;
+        const { title, description, isEvent, isActive } = this.props;
 
-        this.props.adminCreate({ title, description });
+        this.props.adminCreate({ title, description, isEvent, isActive });
     }
 
     render() {
@@ -34,6 +37,26 @@ class AdminCreate extends Component {
                 </CardSection>
 
                 <CardSection>
+                    <ToggleInput
+                        label='Allow Event Signups' 
+                        value={this.props.isEvent}
+                        onValueChange={() => {
+                            this.props.adminUpdate({ prop: 'isEvent', value: !(this.props.isEvent) });
+                        }}
+                    />
+                </CardSection>
+
+                <CardSection>
+                    <ToggleInput
+                        label='Event is Visible' 
+                        value={this.props.isActive}
+                        onValueChange={() => {
+                            this.props.adminUpdate({ prop: 'isActive', value: !(this.props.isActive) });
+                        }}
+                    />
+                </CardSection>
+
+                <CardSection>
                     <Button onPress={this.onButtonPress.bind(this)}>
                         Create
                     </Button>
@@ -45,9 +68,9 @@ class AdminCreate extends Component {
 }
 
 export const mapStateToProps = (state) => {
-    const { title, description } = state.adminForm;
+    const { title, description, isEvent, isActive } = state.adminForm;
 
-    return { title, description };
+    return { title, description, isEvent, isActive };
 };
 
 export default connect(mapStateToProps, { adminUpdate, adminCreate })(AdminCreate);

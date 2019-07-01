@@ -23,14 +23,14 @@ export const adminUpdate = ({ prop, value }) => {
     };
 };
 
-export const adminCreate = ({ title, description }) => {
+export const adminCreate = ({ title, description, isEvent, isActive }) => {
     const { currentUser } = firebase.auth();
     const parsedTitle = title.replace(/ /g, '-');
     console.log(parsedTitle);
 
     const updates = {
         [`adminAnnouncements/${currentUser.uid}/${parsedTitle}`]: true,
-        [`announcements/${parsedTitle}`]: { title, description }
+        [`announcements/${parsedTitle}`]: { title, description, isEvent, isActive }
     };
 
     

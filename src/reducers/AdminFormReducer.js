@@ -4,7 +4,9 @@ import {
 
 const INITIAL_STATE = {
     title: '',
-    description: ''
+    description: '',
+    isEvent: false,
+    isActive: true
 };
 
 export default (state = INITIAL_STATE, action) => {
