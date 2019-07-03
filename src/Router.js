@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import AdminHome from './components/adminFlow/AdminHome';
 import Announcements from './components/mainFlow/Announcements';
 import AdminCreate from './components/adminFlow/AdminCreate';
+import AdminEdit from './components/adminFlow/AdminEdit';
 
 const RouterComponent = () => {
     return (
@@ -36,6 +37,11 @@ const RouterComponent = () => {
                         key='adminCreate' 
                         component={AdminCreate}
                         title='Create Announcment'    
+                    />
+                    <Scene 
+                        key='adminEdit'
+                        component={AdminEdit}
+                        title='Edit Announcement'
                     />
                 </Scene>
 

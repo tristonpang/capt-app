@@ -6,3 +6,4 @@ export const LOGIN_USER = 'login_user';
 
 export const ADMIN_LIST_FETCH_SUCCESS = 'admin_list_fetch_success';
 export const ADMIN_UPDATE = 'admin_update';
+export const ADMIN_PICTURE_FETCH = 'admin_picture_fetch';

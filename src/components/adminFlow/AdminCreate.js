@@ -22,7 +22,7 @@ class AdminCreate extends Component {
 
     onImageButtonPress() {
         const options = {
-            title: 'Select Avatar',
+            title: 'Select Picture',
             customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
             storageOptions: {
               skipBackup: true,
@@ -38,8 +38,7 @@ class AdminCreate extends Component {
             } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
             } else {
-                const data = 'data:image/jpeg;base64,' + response.data;
-                this.props.adminUpdate({ prop: 'imgSrc', value: { uri: data } });
+                this.props.adminUpdate({ prop: 'imgSrc', value: { uri: response.uri } });
             }
         });
     }

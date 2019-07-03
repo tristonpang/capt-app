@@ -5,17 +5,22 @@ import { CardSection } from '../common';
 
 
 class AdminListItem extends Component {
+    onItemPress() {
+        Actions.adminEdit({ announcement: this.props.announcement.item });
+    }
 
     render() {
-        console.log(this.props.announcement);
+        //console.log(this.props.announcement);
         return (
-            <View>
-                <CardSection>
-                    <Text style={styles.titleStyle}>
-                        {this.props.announcement.item.title}
-                    </Text>
-                </CardSection>
-            </View>
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={this.onItemPress.bind(this)}>
+                <View>
+                    <CardSection>
+                        <Text style={styles.titleStyle}>
+                            {this.props.announcement.item.title}
+                        </Text>
+                    </CardSection>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }
