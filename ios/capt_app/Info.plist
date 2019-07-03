@@ -28,6 +28,14 @@
 	<string></string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>CAPT App would like access to your photo gallery</string>
+    <key>NSCameraUsageDescription</key>
+    <string>CAPT App would like to use your camera</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>CAPT App would like to save photos to your photo gallery</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>CAPT App would like to use your microphone (for videos)</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

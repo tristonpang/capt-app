@@ -13,7 +13,7 @@ class App extends Component {
             authDomain: "capt-app-efb3b.firebaseapp.com",
             databaseURL: "https://capt-app-efb3b.firebaseio.com",
             projectId: "capt-app-efb3b",
-            storageBucket: "",
+            storageBucket: "gs://capt-app-efb3b.appspot.com/",
             messagingSenderId: "87525430213",
             appId: "1:87525430213:web:2ebf64d952033de3"
           };

@@ -6,7 +6,8 @@ const INITIAL_STATE = {
     title: '',
     description: '',
     isEvent: false,
-    isActive: true
+    isActive: true,
+    imgSrc: {}
 };
 
 export default (state = INITIAL_STATE, action) => {

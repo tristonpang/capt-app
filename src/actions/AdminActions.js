@@ -6,6 +6,7 @@ import {
     ADMIN_UPDATE
 } from './types';
 
+//TODO: refactor this action, too much nesting
 export const adminListFetch = () => {
     const { currentUser } = firebase.auth();
 
@@ -19,7 +20,7 @@ export const adminListFetch = () => {
                             (val, key) => {
                                 const announcementObject = annSnapshot.val()[key];
                                 if (announcementObject) {
-                                    console.log(announcementObject);
+                                    //console.log(announcementObject);
                                     return announcementObject;
                                 }
                             }
@@ -29,14 +30,6 @@ export const adminListFetch = () => {
                     });
             });
     };
-    /*
-    return (dispatch) => {
-        firebase.database().ref(`/adminAnnouncements/${currentUser.uid}`)
-            .on('value', snapshot => {
-                dispatch({ type: ADMIN_LIST_FETCH_SUCCESS, payload: snapshot.val() });
-            });
-    };
-    */
 };
 
 export const adminUpdate = ({ prop, value }) => {
@@ -46,7 +39,7 @@ export const adminUpdate = ({ prop, value }) => {
     };
 };
 
-export const adminCreate = ({ title, description, isEvent, isActive }) => {
+export const adminCreate = ({ title, description, isEvent, isActive, imgSrc }) => {
     const { currentUser } = firebase.auth();
     const parsedTitle = title.replace(/ /g, '-');
     console.log(parsedTitle);
@@ -59,6 +52,12 @@ export const adminCreate = ({ title, description, isEvent, isActive }) => {
     
     return () => {
         firebase.database().ref().update(updates)
-            .then(() => Actions.pop());
+            .then(() => {
+                firebase.storage().ref().child(`/images/${parsedTitle + '.jpg'}`)
+                    .putString(imgSrc.uri, 'data_url')
+                    .then(() => Actions.pop())
+                    .catch(error => console.log(error));
+            });
+        
     };
 };
