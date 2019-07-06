@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { TouchableOpacity, ScrollView, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
-import { Card, CardSection, Input, Button, ToggleInput } from '../common';
-import { adminUpdate, adminSaveEdits } from '../../actions';
+import { Card, CardSection, Input, Button, ToggleInput, Confirm } from '../common';
+import { adminUpdate, adminSaveEdits, adminDelete } from '../../actions';
 
 class AdminEdit extends Component {
-    state = { localImgSrc: null };
+    state = { localImgSrc: null, isPopUpVisible: false };
 
     componentDidMount() {
         const { title, description, isEvent, isActive, url, dateTime, venue } = this.props.announcement;
@@ -25,9 +25,31 @@ class AdminEdit extends Component {
     }
 
     onSaveButtonPress() {
-        const { title, description, isActive, imgSrc, url, dateTime, venue } = this.props;
+        const { title, description, isActive, imgSrc, dateTime, venue } = this.props;
 
         this.props.adminSaveEdits({ title, description, isActive, imgSrc, dateTime, venue });
+    }
+
+    onDeleteButtonPress() {
+        this.showPopUp();
+        
+    }
+
+    showPopUp() {
+        this.setState({ ...this.state, isPopUpVisible: true });
+    }
+
+    onPopUpAccept() {
+        this.deleteAnnouncement();
+    }
+
+    onPopUpDecline() {
+        this.setState({ ...this.state, isPopUpVisible: false });
+    }
+
+    deleteAnnouncement() {
+        const { title, url } = this.props;
+        this.props.adminDelete({ title, url });
     }
 
     onImageButtonPress() {
@@ -128,10 +150,22 @@ class AdminEdit extends Component {
                     </CardSection>
 
                     <CardSection>
-                        <Button buttonStyle={styles.deleteButtonStyle} textStyle={styles.deleteTextStyle}>
+                        <Button 
+                            buttonStyle={styles.deleteButtonStyle} 
+                            textStyle={styles.deleteTextStyle}
+                            onPress={this.onDeleteButtonPress.bind(this)}    
+                        >
                             Delete
                         </Button>
                     </CardSection>
+
+                    <Confirm
+                        visible={this.state.isPopUpVisible}
+                        onAccept={this.onPopUpAccept.bind(this)}
+                        onDecline={this.onPopUpDecline.bind(this)}
+                    >
+                        Are you sure you want to delete?
+                    </Confirm>
 
 
                 </Card>
@@ -189,4 +223,4 @@ const mapStateToProps = (state) => {
     return { title, description, isEvent, isActive, imgSrc, url, dateTime, venue };
 };
 
-export default connect(mapStateToProps, { adminUpdate, adminSaveEdits })(AdminEdit);
+export default connect(mapStateToProps, { adminUpdate, adminSaveEdits, adminDelete })(AdminEdit);

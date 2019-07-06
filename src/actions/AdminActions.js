@@ -7,6 +7,10 @@ import {
     ADMIN_UPDATE
 } from './types';
 
+const parseTitle = (title) => {
+    return title.replace(/ /g, '-');
+};
+
 //TODO: refactor this action, too much nesting
 export const adminListFetch = () => {
     const { currentUser } = firebase.auth();
@@ -42,7 +46,7 @@ export const adminUpdate = ({ prop, value }) => {
 
 export const adminCreate = ({ title, description, isEvent, isActive, imgSrc, dateTime, venue }) => {
     const { currentUser } = firebase.auth();
-    const parsedTitle = title.replace(/ /g, '-');
+    const parsedTitle = parseTitle(title);
 
     if (!imgSrc) {
         const updates = {
@@ -100,7 +104,7 @@ export const adminCreate = ({ title, description, isEvent, isActive, imgSrc, dat
 };
 
 export const adminSaveEdits = ({ title, description, isActive, imgSrc, dateTime, venue }) => {
-    const parsedTitle = title.replace(/ /g, '-');
+    const parsedTitle = parseTitle(title);
 
     if (!imgSrc) {
         console.log('adminSaveEdits: No imgSrc detected');
@@ -151,5 +155,30 @@ export const adminSaveEdits = ({ title, description, isActive, imgSrc, dateTime,
                 console.log(error);
             });
             
+    };
+};
+
+export const adminDelete = ({ title, url }) => {
+    const { currentUser } = firebase.auth();
+    const parsedTitle = parseTitle(title);
+
+    const updates = {
+        [`adminAnnouncements/${currentUser.uid}/${parsedTitle}`]: null,
+        [`announcements/${parsedTitle}`]: null
+    };
+
+    return () => {
+        firebase.database().ref().update(updates)
+            .then(() => {
+                if (url) {
+                    firebase.storage().ref()
+                        .child(`/images/${parsedTitle + '.jpg'}`)
+                        .delete();
+                }
+            })
+            .then(() => Actions.pop())
+            .catch((error) => {
+                console.log(error);
+            });
     };
 };
