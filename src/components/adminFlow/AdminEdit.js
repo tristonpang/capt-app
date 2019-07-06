@@ -3,16 +3,31 @@ import { TouchableOpacity, ScrollView, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import { Card, CardSection, Input, Button, ToggleInput } from '../common';
-import { adminUpdate, adminPictureFetch } from '../../actions';
+import { adminUpdate, adminSaveEdits } from '../../actions';
 
 class AdminEdit extends Component {
+    state = { localImgSrc: null };
+
     componentDidMount() {
-        const { title, description, isEvent, isActive, url } = this.props.announcement;
+        const { title, description, isEvent, isActive, url, dateTime, venue } = this.props.announcement;
         this.props.adminUpdate({ prop: 'title', value: title });
         this.props.adminUpdate({ prop: 'description', value: description });
         this.props.adminUpdate({ prop: 'isEvent', value: isEvent });
         this.props.adminUpdate({ prop: 'isActive', value: isActive });
+        this.props.adminUpdate({ prop: 'imgSrc', value: null });
         this.props.adminUpdate({ prop: 'url', value: url });
+        this.props.adminUpdate({ prop: 'dateTime', value: dateTime });
+        this.props.adminUpdate({ prop: 'venue', value: venue });
+
+        if (url) {
+            this.setState({ localImgSrc: { uri: url } });
+        }
+    }
+
+    onSaveButtonPress() {
+        const { title, description, isActive, imgSrc, url, dateTime, venue } = this.props;
+
+        this.props.adminSaveEdits({ title, description, isActive, imgSrc, dateTime, venue });
     }
 
     onImageButtonPress() {
@@ -33,21 +48,21 @@ class AdminEdit extends Component {
             } else if (response.error) {
                 console.log('ImagePicker Error: ', response.error);
             } else {
-                const data = 'data:image/jpeg;base64,' + response.data;
-                this.props.adminUpdate({ prop: 'imgSrc', value: { uri: data } });
+                const imgSrc = { uri: response.uri };
+                this.props.adminUpdate({ prop: 'imgSrc', value: imgSrc });
+                this.setState({ localImgSrc: imgSrc });
             }
         });
     }
 
     renderImageSelection() {
-        if (this.props.url) {
-            console.log('Existing Pic URL: ', this.props.url);
+        if (this.state.localImgSrc) {
             return (
                 <TouchableOpacity 
                     style={styles.buttonStyle} 
                     onPress={this.onImageButtonPress.bind(this)}
                 >
-                    <Image source={{ uri: this.props.url }} style={styles.imageStyle} />
+                    <Image source={this.state.localImgSrc} style={styles.imageStyle} />
                 </TouchableOpacity>
             );
         }
@@ -70,6 +85,52 @@ class AdminEdit extends Component {
                         <Text style={styles.titleStyle}>
                             {this.props.title}
                         </Text>
+                    </CardSection>
+
+                    <CardSection>
+                        <Input 
+                            label='Date/Time'
+                            value={this.props.dateTime}
+                            onChangeText={text => this.props.adminUpdate({ prop: 'dateTime', value: text })}
+                        />
+                    </CardSection>
+
+                    <CardSection>
+                        <Input 
+                            label='Venue'
+                            value={this.props.venue}
+                            onChangeText={text => this.props.adminUpdate({ prop: 'venue', value: text })}
+                        />
+                    </CardSection>
+                    
+                    <CardSection>
+                        <Input 
+                            label='Description'
+                            value={this.props.description}
+                            onChangeText={text => this.props.adminUpdate({ prop: 'description', value: text })}
+                        />
+                    </CardSection>
+
+                    <CardSection>
+                        <ToggleInput
+                            label='Event is Visible' 
+                            value={this.props.isActive}
+                            onValueChange={() => {
+                                this.props.adminUpdate({ prop: 'isActive', value: !(this.props.isActive) });
+                            }}
+                        />
+                    </CardSection>
+
+                    <CardSection>
+                        <Button onPress={this.onSaveButtonPress.bind(this)}>
+                            Save Changes
+                        </Button>
+                    </CardSection>
+
+                    <CardSection>
+                        <Button buttonStyle={styles.deleteButtonStyle} textStyle={styles.deleteTextStyle}>
+                            Delete
+                        </Button>
                     </CardSection>
 
 
@@ -101,13 +162,31 @@ const styles = {
     },
     titleStyle: {
         fontSize: 20
+    },
+    deleteButtonStyle: {
+        flex: 1,
+        alignSelf: 'stretch',
+        backgroundColor: '#d40000',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#000',
+        marginLeft: 5,
+        marginRight: 5
+    },
+    deleteTextStyle: {
+        alignSelf: 'center',
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        paddingTop: 10,
+        paddingBottom: 10
     }
 };
 
 const mapStateToProps = (state) => {
-    const { title, description, isEvent, isActive, url } = state.adminForm;
+    const { title, description, isEvent, isActive, imgSrc, url, dateTime, venue } = state.adminForm;
 
-    return { title, description, isEvent, isActive, url };
+    return { title, description, isEvent, isActive, imgSrc, url, dateTime, venue };
 };
 
-export default connect(mapStateToProps, { adminUpdate, adminPictureFetch })(AdminEdit);
+export default connect(mapStateToProps, { adminUpdate, adminSaveEdits })(AdminEdit);

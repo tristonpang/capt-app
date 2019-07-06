@@ -7,17 +7,20 @@ import { adminUpdate, adminCreate } from '../../actions';
 
 class AdminCreate extends Component {
     componentDidMount() {
+        //reset form to empty
         this.props.adminUpdate({ prop: 'title', value: '' });
         this.props.adminUpdate({ prop: 'description', value: '' });
         this.props.adminUpdate({ prop: 'isEvent', value: false });
         this.props.adminUpdate({ prop: 'isActive', value: true });
-        this.props.adminUpdate({ prop: 'imgSrc', value: '' });
+        this.props.adminUpdate({ prop: 'imgSrc', value: null }); // empty object {} is not falsy, we have to set to null for form to be empty
+        this.props.adminUpdate({ prop: 'dateTime', value: '' });
+        this.props.adminUpdate({ prop: 'venue', value: '' });
     }
 
     onButtonPress() {
-        const { title, description, isEvent, isActive, imgSrc } = this.props;
+        const { title, description, isEvent, isActive, imgSrc, dateTime, venue } = this.props;
 
-        this.props.adminCreate({ title, description, isEvent, isActive, imgSrc });
+        this.props.adminCreate({ title, description, isEvent, isActive, imgSrc, dateTime, venue });
     }
 
     onImageButtonPress() {
@@ -73,6 +76,23 @@ class AdminCreate extends Component {
                             onChangeText={text => this.props.adminUpdate({ prop: 'title', value: text })}
                         />
                     </CardSection>
+
+                    <CardSection>
+                        <Input 
+                            label='Date/Time'
+                            value={this.props.dateTime}
+                            onChangeText={text => this.props.adminUpdate({ prop: 'dateTime', value: text })}
+                        />
+                    </CardSection>
+                    
+                    <CardSection>
+                        <Input 
+                            label='Venue'
+                            value={this.props.venue}
+                            onChangeText={text => this.props.adminUpdate({ prop: 'venue', value: text })}
+                        />
+                    </CardSection>
+
                     <CardSection>
                         <Input 
                             label='Description'
@@ -136,9 +156,9 @@ const styles = {
 };
 
 export const mapStateToProps = (state) => {
-    const { title, description, isEvent, isActive, imgSrc } = state.adminForm;
+    const { title, description, isEvent, isActive, imgSrc, dateTime, venue } = state.adminForm;
 
-    return { title, description, isEvent, isActive, imgSrc };
+    return { title, description, isEvent, isActive, imgSrc, dateTime, venue };
 };
 
 export default connect(mapStateToProps, { adminUpdate, adminCreate })(AdminCreate);
