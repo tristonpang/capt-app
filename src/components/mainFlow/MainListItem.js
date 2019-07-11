@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection } from '../common';
 
 class MainListItem extends Component {
+    onItemPress() {
+        Actions.mainDetail();
+    }
+    
     render() {
         const { title, url, dateTime, venue } = this.props.announcement.item;
         const { 
@@ -15,21 +19,23 @@ class MainListItem extends Component {
         } = styles;
 
         return (
-            <Card>
-                <CardSection>
-                    <Image source={{ uri: url }} style={imageStyle} />
-                </CardSection>
+            <TouchableOpacity style={{ flex: 1 }} onPress={this.onItemPress.bind(this)}>
+                <Card>
+                    <CardSection>
+                        <Image source={{ uri: url }} style={imageStyle} />
+                    </CardSection>
 
-                <CardSection>
-                    <View style={titleContainerStyle}>
-                        <Text style={titleStyle}>{title}</Text>
-                    </View>
-                    <View style={detailsContainerStyle}>
-                        <Text style={detailsTextStyle}>{dateTime}</Text>
-                        <Text style={detailsTextStyle}>{venue}</Text>
-                    </View>
-                </CardSection>
-            </Card>
+                    <CardSection>
+                        <View style={titleContainerStyle}>
+                            <Text style={titleStyle}>{title}</Text>
+                        </View>
+                        <View style={detailsContainerStyle}>
+                            <Text style={detailsTextStyle}>{dateTime}</Text>
+                            <Text style={detailsTextStyle}>{venue}</Text>
+                        </View>
+                    </CardSection>
+                </Card>
+            </TouchableOpacity>
         );
     }
 }

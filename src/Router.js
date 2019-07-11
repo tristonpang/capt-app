@@ -7,6 +7,7 @@ import AdminCreate from './components/adminFlow/AdminCreate';
 import AdminEdit from './components/adminFlow/AdminEdit';
 import Profile from './components/mainFlow/Profile';
 import Buzz from './components/mainFlow/Buzz';
+import MainDetail from './components/mainFlow/MainDetail';
 
 const RouterComponent = () => {
     return (
@@ -36,6 +37,11 @@ const RouterComponent = () => {
                             title='Buzz'
                         />
                     </Tabs>
+                    <Scene 
+                        key='mainDetail'
+                        component={MainDetail}
+                        title='Announcement Details'
+                    />
                 </Scene>
 
                 <Scene key='admin'>
