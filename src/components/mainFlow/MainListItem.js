@@ -5,7 +5,7 @@ import { Card, CardSection } from '../common';
 
 class MainListItem extends Component {
     onItemPress() {
-        Actions.mainDetail();
+        Actions.mainDetail({ announcement: this.props.announcement.item });
     }
     
     render() {
