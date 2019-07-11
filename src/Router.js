@@ -1,10 +1,12 @@
 import React from 'react';
-import { Scene, Router, Actions } from 'react-native-router-flux';
+import { Scene, Router, Actions, Tabs } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import AdminHome from './components/adminFlow/AdminHome';
 import Announcements from './components/mainFlow/Announcements';
 import AdminCreate from './components/adminFlow/AdminCreate';
 import AdminEdit from './components/adminFlow/AdminEdit';
+import Profile from './components/mainFlow/Profile';
+import Buzz from './components/mainFlow/Buzz';
 
 const RouterComponent = () => {
     return (
@@ -15,13 +17,25 @@ const RouterComponent = () => {
                     <Scene key='login' component={LoginForm} title='CAPT App' initial />
                 </Scene>
 
-                <Scene key='main'>
-                    <Scene 
-                        key='announcements'
-                        component={Announcements}
-                        title='Announcements'
-                        initial
-                    />
+                <Scene key='main' hideNavBar>
+                    <Tabs>
+                        <Scene 
+                            key='profile'
+                            component={Profile}
+                            title='My Profile'
+                        />
+                        <Scene 
+                            key='announcements'
+                            component={Announcements}
+                            title='Announcements'
+                            initial
+                        />
+                        <Scene 
+                            key='buzz'
+                            component={Buzz}
+                            title='Buzz'
+                        />
+                    </Tabs>
                 </Scene>
 
                 <Scene key='admin'>

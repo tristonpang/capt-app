@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Card, CardSection, Button } from '../common';
 
-class Announcements extends Component {
+class Buzz extends Component {
     render() {
         return (
             <Card>
                 <CardSection>
-                    <Button>Announcements</Button>
+                    <Button>Buzz</Button>
                 </CardSection>
             </Card>
         );
     }
 }
 
-export default Announcements;
+export default Buzz;
