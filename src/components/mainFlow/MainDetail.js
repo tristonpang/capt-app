@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, Text } from 'react-native';
-import { Card, CardSection } from '../common';
+import { connect } from 'react-redux';
+import { Card, CardSection, Button } from '../common';
+import { signupForEvent } from '../../actions';
 
 class MainDetail extends Component {
+    onSignupButtonPress() {
+        this.props.signupForEvent(this.props.announcement.key);
+    }
+    
+    renderSignupButton() {
+        if (this.props.announcement.isEvent) {
+            return (
+                <CardSection>
+                    <Button onPress={this.onSignupButtonPress.bind(this)}>Sign Up</Button>
+                </CardSection>
+            );
+        }
+    }
+
     render() {
         const { url, title, dateTime, venue, description } = this.props.announcement;
         const { 
@@ -23,6 +39,8 @@ class MainDetail extends Component {
                         <Text>{dateTime}</Text>
                         <Text>{venue}</Text>
                     </CardSection>
+
+                    {this.renderSignupButton()}
 
                     <CardSection>
                         <Text style={descriptionStyle}>{description}</Text>
@@ -58,4 +76,4 @@ const styles = {
     }
 };
 
-export default MainDetail;
+export default connect(null, { signupForEvent })(MainDetail);
