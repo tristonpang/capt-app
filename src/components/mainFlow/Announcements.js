@@ -10,7 +10,11 @@ class Announcements extends Component {
     }
 
     renderItem(announcement) {
-        return <MainListItem announcement={announcement} />;
+        return (
+            <MainListItem 
+                announcement={announcement}
+            />
+        );
     }
 
     render() {
@@ -25,9 +29,11 @@ class Announcements extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { announcements } = state.mainAnnouncements;
-
-    return { announcements };
+    const { announcements, userSignups } = state.mainAnnouncements;
+    
+    return { announcements, userSignups };
 };
 
-export default connect(mapStateToProps, { announcementsListFetch })(Announcements);
+export default connect(mapStateToProps, { 
+    announcementsListFetch
+})(Announcements);

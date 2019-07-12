@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import { ScrollView, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button } from '../common';
-import { signupForEvent } from '../../actions';
+import { signupForEvent, withdrawFromEvent } from '../../actions';
 
 class MainDetail extends Component {
     onSignupButtonPress() {
         this.props.signupForEvent(this.props.announcement.key);
     }
+
+    onWithdrawButtonPress() {
+        this.props.withdrawFromEvent(this.props.announcement.key);
+    }
     
     renderSignupButton() {
-        if (this.props.announcement.isEvent) {
+        const { isEvent, isUserSignedUp } = this.props.announcement;
+
+        if (!isEvent) {
+            return;
+        }
+
+        if (isUserSignedUp) {
             return (
                 <CardSection>
-                    <Button onPress={this.onSignupButtonPress.bind(this)}>Sign Up</Button>
+                    <Button onPress={this.onWithdrawButtonPress.bind(this)}>Withdraw</Button>
                 </CardSection>
             );
         }
+
+        return (
+            <CardSection>
+                <Button onPress={this.onSignupButtonPress.bind(this)}>Sign Up</Button>
+            </CardSection>
+        );
     }
 
     render() {
+        console.log(this.props.announcement)
         const { url, title, dateTime, venue, description } = this.props.announcement;
         const { 
             titleDetailsStyle,
@@ -76,4 +93,4 @@ const styles = {
     }
 };
 
-export default connect(null, { signupForEvent })(MainDetail);
+export default connect(null, { signupForEvent, withdrawFromEvent })(MainDetail);

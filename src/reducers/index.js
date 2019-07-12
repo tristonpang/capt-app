@@ -8,5 +8,5 @@ export default combineReducers({
     auth: AuthReducer,
     adminAnnouncements: AdminReducer,
     adminForm: AdminFormReducer,
-    mainAnnouncements: AnnouncementsReducer
+    mainAnnouncements: AnnouncementsReducer,
 });
