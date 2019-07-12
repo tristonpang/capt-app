@@ -8,4 +8,3 @@ export const ADMIN_LIST_FETCH_SUCCESS = 'admin_list_fetch_success';
 export const ADMIN_UPDATE = 'admin_update';
 
 export const ANNOUNCEMENTS_LIST_FETCH_SUCCESS = 'announcements_list_fetch_success';
-export const USER_SIGNUPS_FETCH_SUCCESS = 'user_signups_fetch_success';

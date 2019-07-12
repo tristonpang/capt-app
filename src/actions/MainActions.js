@@ -2,8 +2,7 @@ import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 import {
-    ANNOUNCEMENTS_LIST_FETCH_SUCCESS,
-    USER_SIGNUPS_FETCH_SUCCESS
+    ANNOUNCEMENTS_LIST_FETCH_SUCCESS
 } from '../actions/types';
 
 const retrieveRoomIdFromEmail = (email) => {
