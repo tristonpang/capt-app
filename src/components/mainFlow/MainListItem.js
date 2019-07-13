@@ -5,8 +5,10 @@ import { Card, CardSection } from '../common';
 
 class MainListItem extends Component {
     onItemPress() {
+        const { item, isFromUserSignups } = this.props.announcement;
         Actions.mainDetail({ 
-            announcement: this.props.announcement.item
+            announcement: item,
+            isFromUserSignups
         });
     }
     

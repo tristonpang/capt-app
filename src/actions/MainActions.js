@@ -99,7 +99,7 @@ export const userSignupsListFetch = () => {
                 firebase.database().ref(`announcements/`)
                     .on('value', annSnapshot => {
                         const announcements = annSnapshot.val();
-                        console.log('ann ', announcements);
+                        //console.log('ann ', announcements);
                         const signedUpEvents = _.map(signupSnapshot.val(), 
                             (val, key) => {
                                 return { ...announcements[key], key };

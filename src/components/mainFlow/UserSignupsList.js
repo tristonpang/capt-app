@@ -10,8 +10,7 @@ class UserSignupsList extends Component {
     }
 
     renderItem(event) {
-        console.log(event);
-        return <MainListItem announcement={event} />;
+        return <MainListItem announcement={{ ...event, isFromUserSignups: true }} />;
     }
 
     render() {

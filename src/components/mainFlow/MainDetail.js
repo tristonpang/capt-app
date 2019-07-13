@@ -15,12 +15,13 @@ class MainDetail extends Component {
     
     renderSignupButton() {
         const { isEvent, isUserSignedUp } = this.props.announcement;
+        const { isFromUserSignups } = this.props;
 
         if (!isEvent) {
             return;
         }
 
-        if (isUserSignedUp) {
+        if (isUserSignedUp || isFromUserSignups) {
             return (
                 <CardSection>
                     <Button onPress={this.onWithdrawButtonPress.bind(this)}>Withdraw</Button>
