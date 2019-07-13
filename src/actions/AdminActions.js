@@ -4,7 +4,8 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import _ from 'lodash';
 import {
     ADMIN_LIST_FETCH_SUCCESS,
-    ADMIN_UPDATE
+    ADMIN_UPDATE,
+    ADMIN_SIGNUPS_LIST_FETCH_SUCCESS
 } from './types';
 
 const parseTitle = (title) => {
@@ -179,6 +180,22 @@ export const adminDelete = ({ title, url }) => {
             .then(() => Actions.pop())
             .catch((error) => {
                 console.log(error);
+            });
+    };
+};
+
+export const adminSignupsListFetch = (titleKey) => {
+    return (dispatch) => {
+        firebase.database().ref(`eventSignups/${titleKey}`)
+            .on('value', snapshot => {
+                const signups = _.map(snapshot.val(), 
+                    (val, key) => {
+                        return key;
+                    });
+                dispatch({
+                    type: ADMIN_SIGNUPS_LIST_FETCH_SUCCESS,
+                    payload: signups
+                });
             });
     };
 };

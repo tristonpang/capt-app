@@ -105,9 +105,11 @@ class AdminEdit extends Component {
     renderSignupsButton() {
         if (this.props.isEvent) {
             return (
-                <Button onPress={this.onSignupsButtonPress.bind(this)}>
-                    Manage Signups
-                </Button>
+                <CardSection>
+                    <Button onPress={this.onSignupsButtonPress.bind(this)}>
+                        Manage Signups
+                    </Button>
+                </CardSection>
             );
         }
     }
