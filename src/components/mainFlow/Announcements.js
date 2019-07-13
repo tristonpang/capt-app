@@ -29,9 +29,9 @@ class Announcements extends Component {
 }
 
 const mapStateToProps = (state) => {
-    const { announcements, userSignups } = state.mainAnnouncements;
+    const { announcements } = state.mainAnnouncements;
     
-    return { announcements, userSignups };
+    return { announcements };
 };
 
 export default connect(mapStateToProps, { 

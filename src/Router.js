@@ -8,6 +8,7 @@ import AdminEdit from './components/adminFlow/AdminEdit';
 import Profile from './components/mainFlow/Profile';
 import Buzz from './components/mainFlow/Buzz';
 import MainDetail from './components/mainFlow/MainDetail';
+import UserSignupsList from './components/mainFlow/UserSignupsList';
 
 const RouterComponent = () => {
     return (
@@ -41,6 +42,11 @@ const RouterComponent = () => {
                         key='mainDetail'
                         component={MainDetail}
                         title='Announcement Details'
+                    />
+                    <Scene 
+                        key='userSignupsList'
+                        component={UserSignupsList}
+                        title='My Signups'
                     />
                 </Scene>
 
