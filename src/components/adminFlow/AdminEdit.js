@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, ScrollView, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import ImagePicker from 'react-native-image-picker';
 import { Card, CardSection, Input, Button, ToggleInput, Confirm } from '../common';
 import { adminUpdate, adminSaveEdits, adminDelete } from '../../actions';
@@ -77,6 +78,12 @@ class AdminEdit extends Component {
         });
     }
 
+    onSignupsButtonPress() {
+        const { key } = this.props.announcement;
+        console.log(key);
+        Actions.adminSignupsList({ titleKey: key });
+    }
+
     renderImageSelection() {
         if (this.state.localImgSrc) {
             return (
@@ -93,6 +100,16 @@ class AdminEdit extends Component {
                 Select Image
             </Button>
         );
+    }
+
+    renderSignupsButton() {
+        if (this.props.isEvent) {
+            return (
+                <Button onPress={this.onSignupsButtonPress.bind(this)}>
+                    Manage Signups
+                </Button>
+            );
+        }
     }
     
     render() {
@@ -142,6 +159,8 @@ class AdminEdit extends Component {
                             }}
                         />
                     </CardSection>
+
+                    {this.renderSignupsButton()}
 
                     <CardSection>
                         <Button onPress={this.onSaveButtonPress.bind(this)}>

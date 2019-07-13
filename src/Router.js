@@ -5,6 +5,7 @@ import AdminHome from './components/adminFlow/AdminHome';
 import Announcements from './components/mainFlow/Announcements';
 import AdminCreate from './components/adminFlow/AdminCreate';
 import AdminEdit from './components/adminFlow/AdminEdit';
+import AdminSignupsList from './components/adminFlow/AdminSignupsList';
 import Profile from './components/mainFlow/Profile';
 import Buzz from './components/mainFlow/Buzz';
 import MainDetail from './components/mainFlow/MainDetail';
@@ -68,6 +69,11 @@ const RouterComponent = () => {
                         key='adminEdit'
                         component={AdminEdit}
                         title='Edit Announcement'
+                    />
+                    <Scene 
+                        key='adminSignupsList'
+                        component={AdminSignupsList}
+                        title='Event Signups'
                     />
                 </Scene>
 

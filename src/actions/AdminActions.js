@@ -26,7 +26,7 @@ export const adminListFetch = () => {
                                 const announcementObject = annSnapshot.val()[key];
                                 if (announcementObject) {
                                     //console.log(announcementObject);
-                                    return announcementObject;
+                                    return { ...announcementObject, key };
                                 }
                             }
                         );
