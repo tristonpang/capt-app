@@ -3,7 +3,7 @@ import { Text, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { adminSignupsListFetch } from '../../actions';
 import AdminSignupsListItem from './AdminSignupsListItem';
-import { Card, CardSection } from '../common';
+import { Card, CardSection, Button } from '../common';
 
 class AdminSignupsList extends Component {
     componentDidMount() {
@@ -28,7 +28,13 @@ class AdminSignupsList extends Component {
                 <CardSection>
                     <Text>{'Total Signups: ' + this.displaySignupsTotal()}</Text>
                 </CardSection>
-            
+
+                <CardSection>
+                    <Button>
+                        Download Signups Data
+                    </Button>
+                </CardSection>
+
                 <FlatList 
                     data={signups}
                     renderItem={this.renderItem}
