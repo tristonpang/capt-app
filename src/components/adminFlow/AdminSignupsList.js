@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { adminSignupsListFetch } from '../../actions';
 import AdminSignupsListItem from './AdminSignupsListItem';
 import { Card, CardSection, Button } from '../common';
+import { Actions } from 'react-native-router-flux';
 
 class AdminSignupsList extends Component {
     componentDidMount() {
@@ -21,6 +22,10 @@ class AdminSignupsList extends Component {
         return this.props.signups.length;
     }
 
+    onDownloadButtonPress() {
+        Actions.adminDownloadSignups({ titleKey: this.props.titleKey });
+    }
+
     render() {
         const { signups } = this.props;
         return (
@@ -30,7 +35,7 @@ class AdminSignupsList extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button>
+                    <Button onPress={this.onDownloadButtonPress.bind(this)}>
                         Download Signups Data
                     </Button>
                 </CardSection>

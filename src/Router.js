@@ -10,6 +10,7 @@ import Profile from './components/mainFlow/Profile';
 import Buzz from './components/mainFlow/Buzz';
 import MainDetail from './components/mainFlow/MainDetail';
 import UserSignupsList from './components/mainFlow/UserSignupsList';
+import AdminDownloadSignups from './components/adminFlow/AdminDownloadSignups';
 
 const RouterComponent = () => {
     return (
@@ -74,6 +75,11 @@ const RouterComponent = () => {
                         key='adminSignupsList'
                         component={AdminSignupsList}
                         title='Event Signups'
+                    />
+                    <Scene 
+                        key='adminDownloadSignups'
+                        component={AdminDownloadSignups}
+                        title='Download Event Signups'
                     />
                 </Scene>
 

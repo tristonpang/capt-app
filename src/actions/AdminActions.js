@@ -5,7 +5,10 @@ import _ from 'lodash';
 import {
     ADMIN_LIST_FETCH_SUCCESS,
     ADMIN_UPDATE,
-    ADMIN_SIGNUPS_LIST_FETCH_SUCCESS
+    ADMIN_SIGNUPS_LIST_FETCH_SUCCESS,
+    ADMIN_SIGNUPS_DOWNLOAD_LINK_PREP_SUCCESS,
+    ADMIN_RESET_SIGNUPS_DOWNLOAD_LINK,
+    ADMIN_COPIED_SIGNUPS_DOWNLOAD_LINK
 } from './types';
 
 const parseTitle = (title) => {
@@ -198,4 +201,29 @@ export const adminSignupsListFetch = (titleKey) => {
                 });
             });
     };
+};
+
+export const adminPrepareSignupsDownload = (titleKey) => {
+    return (dispatch) => {
+        dispatch({ type: ADMIN_RESET_SIGNUPS_DOWNLOAD_LINK });
+        firebase.database().ref(`eventSignups/${titleKey}`)
+            .on('value', snapshot => {
+                const signups = _.map(snapshot.val(), 
+                    (val, key) => {
+                        return key;
+                    });
+                const storageRef = firebase.storage().ref(`signupsData/${titleKey}.txt`);
+                console.log(signups.toString());
+                storageRef.putString(signups.toString())
+                    .then(() => storageRef.getDownloadURL())
+                    .then((url) => dispatch({ 
+                        type: ADMIN_SIGNUPS_DOWNLOAD_LINK_PREP_SUCCESS,
+                        payload: url
+                    }));
+            });
+    };
+};
+
+export const adminCopySignupsDownloadLink = () => {
+    return { type: ADMIN_COPIED_SIGNUPS_DOWNLOAD_LINK };
 };
