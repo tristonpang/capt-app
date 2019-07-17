@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Card, CardSection, Button } from '../common';
+import { Text } from 'react-native';
+import { Card, CardSection } from '../common';
 
 class Buzz extends Component {
     render() {
         return (
             <Card>
                 <CardSection>
-                    <Button>Buzz</Button>
+                    <Text>Under construction! Stay tuned...</Text>
                 </CardSection>
             </Card>
         );
