@@ -14,5 +14,7 @@ export const ADMIN_COPIED_SIGNUPS_DOWNLOAD_LINK = 'admin_copied_signups_download
 export const ANNOUNCEMENTS_LIST_FETCH_SUCCESS = 'announcements_list_fetch_success';
 
 export const PREPARE_PROFILE_DATA = 'prepare_profile_data';
-
 export const USER_SIGNUPS_LIST_FETCH_SUCCESS = 'user_signups_list_fetch_success';
+
+export const CHANGE_PASSWORD_FORM_UPDATE = 'change_password_form_update';
+export const RESET_PASSWORD_FORM_ERROR = 'reset_password_form_error';

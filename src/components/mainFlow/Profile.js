@@ -15,6 +15,10 @@ class Profile extends Component {
         Actions.userSignupsList();
     }
 
+    onChangePasswordButtonPress() {
+        Actions.changePasswordForm();
+    }
+
     render() {
         const { 
             containerStyle, 
@@ -40,6 +44,10 @@ class Profile extends Component {
                 
                 <CardSection>
                     <Button onPress={this.onSignupsButtonPress.bind(this)}>Manage my Signed Up Events</Button>
+                </CardSection>
+
+                <CardSection>
+                    <Button onPress={this.onChangePasswordButtonPress.bind(this)}>Change Password</Button>
                 </CardSection>
             </Card>
         );

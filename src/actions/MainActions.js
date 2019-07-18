@@ -4,7 +4,9 @@ import _ from 'lodash';
 import {
     ANNOUNCEMENTS_LIST_FETCH_SUCCESS,
     PREPARE_PROFILE_DATA,
-    USER_SIGNUPS_LIST_FETCH_SUCCESS
+    USER_SIGNUPS_LIST_FETCH_SUCCESS,
+    CHANGE_PASSWORD_FORM_UPDATE,
+    RESET_PASSWORD_FORM_ERROR
 } from '../actions/types';
 
 const retrieveRoomIdFromEmail = (email) => {
@@ -111,4 +113,39 @@ export const userSignupsListFetch = () => {
                     });
             });
     };
+};
+
+export const changePasswordFormUpdate = ({ prop, value }) => {
+    return { type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop, value } }
+}
+
+export const attemptChangePassword = ({ oldPassword, newPassword, confirmNewPassword }) => {
+    return (dispatch) => {
+        dispatch({ type: RESET_PASSWORD_FORM_ERROR });
+        if (!oldPassword || !newPassword || !confirmNewPassword) {
+            dispatch({ type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop: 'error', value: 'Please fill in all fields' } });
+        } else if (newPassword !== confirmNewPassword) {
+            dispatch({ type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop: 'error', value: 'New passwords do not match' } });
+        } else {
+            changePassword(oldPassword, newPassword, dispatch);
+        }
+    };
+}
+
+const changePassword = (oldPassword, newPassword, dispatch) => {
+    const { currentUser } = firebase.auth();
+    const credential = firebase.auth.EmailAuthProvider
+        .credential(currentUser.email, oldPassword);
+
+    currentUser.reauthenticateWithCredential(credential)
+        .then(() => firebase.auth().currentUser
+            .updatePassword(newPassword)
+            .then(() => Actions.pop()))
+        .catch(error => {
+            dispatch({ 
+                type: CHANGE_PASSWORD_FORM_UPDATE, 
+                payload: { prop: 'error', value: error.message } 
+            });
+        });
+        
 };

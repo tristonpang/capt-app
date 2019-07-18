@@ -7,6 +7,7 @@ import ProfileReducer from './ProfileReducer';
 import UserSignupsReducer from './UserSignupsReducer';
 import AdminSignupsReducer from './AdminSignupsReducer';
 import AdminDownloadSignupsReducer from '../actions/AdminDownloadSignupsReducer';
+import ChangePasswordReducer from './ChangePasswordReducer';
 
 export default combineReducers({
     auth: AuthReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     profile: ProfileReducer,
     userSignups: UserSignupsReducer,
     adminSignups: AdminSignupsReducer,
-    adminDownloadSignups: AdminDownloadSignupsReducer
+    adminDownloadSignups: AdminDownloadSignupsReducer,
+    changePasswordForm: ChangePasswordReducer
 });

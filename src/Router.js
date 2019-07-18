@@ -11,6 +11,7 @@ import Buzz from './components/mainFlow/Buzz';
 import MainDetail from './components/mainFlow/MainDetail';
 import UserSignupsList from './components/mainFlow/UserSignupsList';
 import AdminDownloadSignups from './components/adminFlow/AdminDownloadSignups';
+import ChangePasswordForm from './components/mainFlow/ChangePasswordForm';
 
 const RouterComponent = () => {
     return (
@@ -49,6 +50,11 @@ const RouterComponent = () => {
                         key='userSignupsList'
                         component={UserSignupsList}
                         title='My Signups'
+                    />
+                    <Scene 
+                        key='changePasswordForm'
+                        component={ChangePasswordForm}
+                        title='Change Password'
                     />
                 </Scene>
 
