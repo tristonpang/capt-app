@@ -6,7 +6,9 @@ import {
     PREPARE_PROFILE_DATA,
     USER_SIGNUPS_LIST_FETCH_SUCCESS,
     CHANGE_PASSWORD_FORM_UPDATE,
-    RESET_PASSWORD_FORM_ERROR
+    RESET_PASSWORD_FORM_ERROR,
+    BOOKING_FORM_UPDATE,
+    BOOKING_FORM_RESET
 } from '../actions/types';
 
 const retrieveRoomIdFromEmail = (email) => {
@@ -116,7 +118,7 @@ export const userSignupsListFetch = () => {
 };
 
 export const changePasswordFormUpdate = ({ prop, value }) => {
-    return { type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop, value } }
+    return { type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop, value } };
 }
 
 export const attemptChangePassword = ({ oldPassword, newPassword, confirmNewPassword }) => {
@@ -148,4 +150,12 @@ const changePassword = (oldPassword, newPassword, dispatch) => {
             });
         });
         
+};
+
+export const bookingFormUpdate = ({ prop, value }) => {
+    return { type: BOOKING_FORM_UPDATE, payload: { prop, value } };
+}
+
+export const bookingFormReset = () => {
+    return { type: BOOKING_FORM_RESET };
 };

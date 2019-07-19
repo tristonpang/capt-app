@@ -18,3 +18,6 @@ export const USER_SIGNUPS_LIST_FETCH_SUCCESS = 'user_signups_list_fetch_success'
 
 export const CHANGE_PASSWORD_FORM_UPDATE = 'change_password_form_update';
 export const RESET_PASSWORD_FORM_ERROR = 'reset_password_form_error';
+
+export const BOOKING_FORM_UPDATE = 'booking_form_update';
+export const BOOKING_FORM_RESET = 'booking_form_reset';

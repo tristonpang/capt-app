@@ -12,6 +12,8 @@ import MainDetail from './components/mainFlow/MainDetail';
 import UserSignupsList from './components/mainFlow/UserSignupsList';
 import AdminDownloadSignups from './components/adminFlow/AdminDownloadSignups';
 import ChangePasswordForm from './components/mainFlow/ChangePasswordForm';
+import Booking from './components/mainFlow/Booking';
+import BookingForm from './components/mainFlow/BookingForm';
 
 const RouterComponent = () => {
     return (
@@ -40,6 +42,11 @@ const RouterComponent = () => {
                             component={Buzz}
                             title='Buzz'
                         />
+                        <Scene 
+                            key='booking'
+                            component={Booking}
+                            title='Booking'
+                        />
                     </Tabs>
                     <Scene 
                         key='mainDetail'
@@ -55,6 +62,11 @@ const RouterComponent = () => {
                         key='changePasswordForm'
                         component={ChangePasswordForm}
                         title='Change Password'
+                    />
+                    <Scene 
+                        key='bookingForm'
+                        component={BookingForm}
+                        title='Booking Details'
                     />
                 </Scene>
 
