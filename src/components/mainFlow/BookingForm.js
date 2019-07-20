@@ -3,6 +3,16 @@ import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { Input, Card, CardSection, Button } from '../common';
 import { bookingFormUpdate, bookingFormReset } from '../../actions';
+import {
+    THEME_ROOMS,
+    MPSH,
+    FLYING_SEED,
+    SEMINAR_ROOMS
+} from '../../actions/types';
+import BookingThemeRoomsFields from './BookingThemeRoomsFields';
+import BookingMPSHFields from './BookingMPSHFields';
+import BookingFlyingSeedFields from './BookingFlyingSeedFields';
+import BookingSeminarRoomsFields from './BookingSeminarRoomsFields';
 
 const START_DATETIME = 'start';
 const END_DATETIME = 'end';
@@ -59,6 +69,19 @@ class BookingForm extends Component {
         this.setState({ isEndDateTimePickerVisible: false });
     }
 
+    renderSpecificFields() {
+        const { bookingType } = this.props;
+        if (bookingType === THEME_ROOMS) {
+            return <BookingThemeRoomsFields />;
+        } else if (bookingType === MPSH) {
+            return <BookingMPSHFields />;
+        } else if (bookingType === FLYING_SEED) {
+            return <BookingFlyingSeedFields />;
+        } else if (bookingType === SEMINAR_ROOMS) {
+            return <BookingSeminarRoomsFields />;
+        }
+    }
+
     render() {
         return (
             <Card>
@@ -104,6 +127,27 @@ class BookingForm extends Component {
                         mode='datetime'
                     />
                 </CardSection>
+                
+                {this.renderSpecificFields()}
+
+                <CardSection>
+                    <Input
+                        label='Description of Activities'
+                        placeholder='description'
+                        onChangeText={text => 
+                            this.props.bookingFormUpdate({ 
+                                prop: 'description', 
+                                value: text 
+                            })}
+                        value={this.props.description}
+                    />
+                </CardSection>
+
+                <CardSection>
+                    <Button>
+                        Send Booking Request
+                    </Button>
+                </CardSection>
             </Card>
         );
     }
@@ -113,8 +157,7 @@ const mapStateToProps = (state) => {
     const { 
         name, 
         phone, 
-        description, 
-        matric, 
+        description,
         startDateTime, 
         endDateTime 
     } = state.bookingForm;
@@ -122,8 +165,7 @@ const mapStateToProps = (state) => {
     return { 
         name, 
         phone, 
-        description, 
-        matric, 
+        description,  
         startDateTime, 
         endDateTime 
     };

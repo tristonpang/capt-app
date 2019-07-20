@@ -21,3 +21,7 @@ export const RESET_PASSWORD_FORM_ERROR = 'reset_password_form_error';
 
 export const BOOKING_FORM_UPDATE = 'booking_form_update';
 export const BOOKING_FORM_RESET = 'booking_form_reset';
+export const THEME_ROOMS = 'theme_rooms';
+export const MPSH = 'mpsh';
+export const FLYING_SEED = 'flying_seed';
+export const SEMINAR_ROOMS = 'seminar_rooms';

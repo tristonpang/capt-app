@@ -9,7 +9,15 @@ const INITIAL_STATE = {
     description: '',
     matric: '',
     startDateTime: '',
-    endDateTime: ''
+    endDateTime: '',
+    trNumber: 'TR1',
+    tr2Captain: '',
+    mpshNumberOfCaptains: '',
+    mpshNumberOfNonCaptains: '',
+    mpshCourtsNeeded: 'A',
+    mpshEquipmentRequired: '',
+    numberOfParticipants: '',
+    srNumber: 'Any'
 };
 
 export default (state = INITIAL_STATE, action) => {
