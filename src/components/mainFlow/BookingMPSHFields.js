@@ -47,7 +47,7 @@ class BookingMPSHFields extends Component {
                 <CardSection style={{ flexDirection: 'column' }}>
                     <Text style={styles.pickerLabelStyle}>Courts Needed</Text>
                     <Picker
-                        selectedValue={this.props.trNumber}
+                        selectedValue={this.props.mpshCourtsNeeded}
                         onValueChange={court => 
                             this.props.bookingFormUpdate({ prop: 'mpshCourtsNeeded', value: court })}
                     >

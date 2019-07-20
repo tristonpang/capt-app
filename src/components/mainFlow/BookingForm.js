@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import { email } from 'react-native-communications';
 import { Input, Card, CardSection, Button } from '../common';
 import { bookingFormUpdate, bookingFormReset } from '../../actions';
 import {
@@ -13,6 +14,7 @@ import BookingThemeRoomsFields from './BookingThemeRoomsFields';
 import BookingMPSHFields from './BookingMPSHFields';
 import BookingFlyingSeedFields from './BookingFlyingSeedFields';
 import BookingSeminarRoomsFields from './BookingSeminarRoomsFields';
+import { Actions } from 'react-native-router-flux';
 
 const START_DATETIME = 'start';
 const END_DATETIME = 'end';
@@ -25,6 +27,26 @@ class BookingForm extends Component {
 
     componentDidMount() {
         this.props.bookingFormReset();
+        const { bookingType, bookingFormUpdate } = this.props;
+        if (bookingType === THEME_ROOMS) {
+            bookingFormUpdate({ prop: 'trNumber', value: 'TR1' });
+        } else if (bookingType === MPSH) {
+            bookingFormUpdate({ prop: 'mpshCourtsNeeded', value: 'A' });
+        } else if (bookingType === SEMINAR_ROOMS) {
+            bookingFormUpdate({ prop: 'srNumber', value: 'Any' });
+        }
+    }
+
+    onSendRequestPress() {
+        const { fullForm } = this.props;
+        let message = '';
+        for (var key in fullForm) {
+            if (fullForm[key]) {
+                message += `${key}: ${fullForm[key]}\n`;
+            }
+        }
+        Actions.pop();
+        email(['test@capt.com'], null, null, `${this.props.bookingType} Booking Request`, message);
     }
 
     renderDateTimeButton(dateTimeType) {
@@ -144,7 +166,7 @@ class BookingForm extends Component {
                 </CardSection>
 
                 <CardSection>
-                    <Button>
+                    <Button onPress={this.onSendRequestPress.bind(this)}>
                         Send Booking Request
                     </Button>
                 </CardSection>
@@ -159,15 +181,18 @@ const mapStateToProps = (state) => {
         phone, 
         description,
         startDateTime, 
-        endDateTime 
+        endDateTime
     } = state.bookingForm;
+
+    const fullForm = state.bookingForm;
 
     return { 
         name, 
         phone, 
-        description,  
+        description,
         startDateTime, 
-        endDateTime 
+        endDateTime,
+        fullForm
     };
 };
 
