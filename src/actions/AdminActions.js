@@ -28,14 +28,14 @@ export const adminListFetch = () => {
                         const currentAdminAnnouncements = _.map(announcementKeys, 
                             (val, key) => {
                                 const announcementObject = annSnapshot.val()[key];
-                                if (announcementObject) {
-                                    //console.log(announcementObject);
-                                    return { ...announcementObject, key };
-                                }
+                                //console.log(announcementObject);
+                                return { ...announcementObject, key };
                             }
                         );
+                        const filteredAdminAnnouncements = _.filter(currentAdminAnnouncements,
+                            (item) => item);
                         //console.log(currentAdminAnnouncements);
-                        dispatch({ type: ADMIN_LIST_FETCH_SUCCESS, payload: currentAdminAnnouncements });
+                        dispatch({ type: ADMIN_LIST_FETCH_SUCCESS, payload: filteredAdminAnnouncements });
                     });
             });
     };
@@ -168,21 +168,30 @@ export const adminDelete = ({ title, url }) => {
 
     const updates = {
         [`adminAnnouncements/${currentUser.uid}/${parsedTitle}`]: null,
-        [`announcements/${parsedTitle}`]: null
+        [`announcements/${parsedTitle}`]: null,
+        [`eventSignups/${parsedTitle}`]: null
     };
 
     return () => {
-        firebase.database().ref().update(updates)
-            .then(() => {
-                if (url) {
-                    firebase.storage().ref()
-                        .child(`/images/${parsedTitle + '.jpg'}`)
-                        .delete();
+        firebase.database().ref(`/eventSignups/${parsedTitle}`)
+            .once('value', snapshot => {
+                for (let key in snapshot.val()) {
+                    updates[`userSignups/${key}/${parsedTitle}`] = null;
                 }
             })
-            .then(() => Actions.pop())
-            .catch((error) => {
-                console.log(error);
+            .then(() => {
+                firebase.database().ref().update(updates)
+                    .then(() => {
+                        if (url) {
+                            firebase.storage().ref()
+                                .child(`/images/${parsedTitle + '.jpg'}`)
+                                .delete();
+                        }
+                    })
+                    .then(() => Actions.pop())
+                    .catch((error) => {
+                        console.log(error);
+                    });
             });
     };
 };

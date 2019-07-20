@@ -19,7 +19,12 @@ class AdminHome extends Component {
             <FlatList 
                 data={this.props.announcements}
                 renderItem={this.renderItem}
-                keyExtractor={announcement => announcement.title.toString()}
+                keyExtractor={announcement => {
+                    if (!announcement.title) {
+                        return 'deleted';
+                    }
+                    return announcement.title.toString();
+                }}
             />
         );
     }

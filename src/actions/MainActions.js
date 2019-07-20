@@ -35,10 +35,12 @@ export const announcementsListFetch = () => {
                                     key 
                                 };
                             });
+                        const filteredAnnouncements = _.filter(currentAnnouncements, 
+                            (item) => item);
                         //console.log(currentAnnouncements);
                         dispatch({ 
                             type: ANNOUNCEMENTS_LIST_FETCH_SUCCESS,
-                            payload: currentAnnouncements
+                            payload: filteredAnnouncements
                         });
                     });
 
