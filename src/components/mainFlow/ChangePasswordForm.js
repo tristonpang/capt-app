@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Input, Card, CardSection, Button } from '../common';
+import { Input, Card, CardSection, Button, Spinner } from '../common';
 import { changePasswordFormUpdate, attemptChangePassword } from '../../actions';
 
 class ChangePasswordForm extends Component {
     componentDidMount() {
+        //TODO: need to refactor this, call single reset action
         this.props.changePasswordFormUpdate({ prop: 'oldPassword', value: '' });
         this.props.changePasswordFormUpdate({ prop: 'newPassword', value: '' });
         this.props.changePasswordFormUpdate({ prop: 'confirmNewPassword', value: '' });
         this.props.changePasswordFormUpdate({ prop: 'error', value: '' });
+        this.props.changePasswordFormUpdate({ prop: 'loading', value: false });
+    }
+
+    onChangePasswordButtonPress() {
+        const { oldPassword, newPassword, confirmNewPassword } = this.props;
+        this.props.attemptChangePassword({ oldPassword, newPassword, confirmNewPassword });
     }
 
     renderError() {
@@ -24,9 +31,15 @@ class ChangePasswordForm extends Component {
         }
     }
 
-    onChangePasswordButtonPress() {
-        const { oldPassword, newPassword, confirmNewPassword } = this.props;
-        this.props.attemptChangePassword({ oldPassword, newPassword, confirmNewPassword });
+    renderChangePasswordButton() {
+        if (this.props.loading) {
+            return <Spinner size='large' />;
+        }
+        return (
+            <Button onPress={this.onChangePasswordButtonPress.bind(this)}>
+                Change Password
+            </Button>
+        );
     }
     
     render() {
@@ -72,9 +85,7 @@ class ChangePasswordForm extends Component {
                 {this.renderError()}
 
                 <CardSection>
-                    <Button onPress={this.onChangePasswordButtonPress.bind(this)}>
-                        Change Password
-                    </Button>
+                    {this.renderChangePasswordButton()}
                 </CardSection>
             </Card>
         );
@@ -90,9 +101,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { oldPassword, newPassword, confirmNewPassword, error } = state.changePasswordForm;
+    const { oldPassword, newPassword, confirmNewPassword, error, loading } = state.changePasswordForm;
 
-    return { oldPassword, newPassword, confirmNewPassword, error };
+    return { oldPassword, newPassword, confirmNewPassword, error, loading };
 };
 
 export default connect(mapStateToProps, { 

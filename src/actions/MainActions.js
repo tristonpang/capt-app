@@ -7,6 +7,8 @@ import {
     USER_SIGNUPS_LIST_FETCH_SUCCESS,
     CHANGE_PASSWORD_FORM_UPDATE,
     RESET_PASSWORD_FORM_ERROR,
+    CHANGE_PASSWORD_START_LOADING,
+    CHANGE_PASSWORD_END_LOADING,
     BOOKING_FORM_UPDATE,
     BOOKING_FORM_RESET
 } from '../actions/types';
@@ -126,10 +128,13 @@ export const changePasswordFormUpdate = ({ prop, value }) => {
 export const attemptChangePassword = ({ oldPassword, newPassword, confirmNewPassword }) => {
     return (dispatch) => {
         dispatch({ type: RESET_PASSWORD_FORM_ERROR });
+        dispatch({ type: CHANGE_PASSWORD_START_LOADING });
         if (!oldPassword || !newPassword || !confirmNewPassword) {
             dispatch({ type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop: 'error', value: 'Please fill in all fields' } });
+            dispatch({ type: CHANGE_PASSWORD_END_LOADING });
         } else if (newPassword !== confirmNewPassword) {
             dispatch({ type: CHANGE_PASSWORD_FORM_UPDATE, payload: { prop: 'error', value: 'New passwords do not match' } });
+            dispatch({ type: CHANGE_PASSWORD_END_LOADING });
         } else {
             changePassword(oldPassword, newPassword, dispatch);
         }
@@ -150,6 +155,7 @@ const changePassword = (oldPassword, newPassword, dispatch) => {
                 type: CHANGE_PASSWORD_FORM_UPDATE, 
                 payload: { prop: 'error', value: error.message } 
             });
+            dispatch({ type: CHANGE_PASSWORD_END_LOADING });
         });
         
 };

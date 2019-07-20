@@ -18,6 +18,8 @@ export const USER_SIGNUPS_LIST_FETCH_SUCCESS = 'user_signups_list_fetch_success'
 
 export const CHANGE_PASSWORD_FORM_UPDATE = 'change_password_form_update';
 export const RESET_PASSWORD_FORM_ERROR = 'reset_password_form_error';
+export const CHANGE_PASSWORD_START_LOADING = 'change_password_start_loading';
+export const CHANGE_PASSWORD_END_LOADING = 'change_password_end_loading';
 
 export const BOOKING_FORM_UPDATE = 'booking_form_update';
 export const BOOKING_FORM_RESET = 'booking_form_reset';

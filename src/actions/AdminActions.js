@@ -222,7 +222,7 @@ export const adminPrepareSignupsDownload = (titleKey) => {
                         return key;
                     });
                 const storageRef = firebase.storage().ref(`signupsData/${titleKey}.txt`);
-                console.log(signups.toString());
+                //console.log(signups.toString());
                 storageRef.putString(signups.toString())
                     .then(() => storageRef.getDownloadURL())
                     .then((url) => dispatch({ 
