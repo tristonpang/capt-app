@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { Card, CardSection, Input, Button, Spinner } from './common';
 import { usernameChanged, passwordChanged, loginUser } from '../actions';
@@ -44,32 +44,38 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <Card>
-                <CardSection>
-                    <Input
-                        label='Room ID'
-                        placeholder='18-71A'
-                        onChangeText={this.onUsernameChange.bind(this)}
-                        value={this.props.username}
-                    />
-                </CardSection>
+            <View>
+                <Image 
+                    source={require('../resources/logo.png')} 
+                    style={styles.logoStyle}
+                />
+                <Card>
+                    <CardSection>
+                        <Input
+                            label='Room ID'
+                            placeholder='18-71A'
+                            onChangeText={this.onUsernameChange.bind(this)}
+                            value={this.props.username}
+                        />
+                    </CardSection>
 
-                <CardSection>
-                    <Input 
-                        secureTextEntry
-                        label='Password'
-                        placeholder='password'
-                        onChangeText={this.onPasswordChange.bind(this)}
-                        value={this.props.password}
-                    />
-                </CardSection>
-                    
-                {this.renderError()}
+                    <CardSection>
+                        <Input 
+                            secureTextEntry
+                            label='Password'
+                            placeholder='password'
+                            onChangeText={this.onPasswordChange.bind(this)}
+                            value={this.props.password}
+                        />
+                    </CardSection>
+                        
+                    {this.renderError()}
 
-                <CardSection>
-                    {this.renderButton()}
-                </CardSection>
-            </Card>
+                    <CardSection>
+                        {this.renderButton()}
+                    </CardSection>
+                </Card>
+            </View>
         );
     }
 }
@@ -79,6 +85,11 @@ const styles = {
         fontSize: 20,
         alignSelf: 'center',
         color: 'red'
+    },
+    logoStyle: {
+        alignSelf: 'center',
+        marginBottom: 20,
+        marginTop: 20
     }
 };
 
