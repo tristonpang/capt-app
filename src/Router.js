@@ -14,6 +14,15 @@ import AdminDownloadSignups from './components/adminFlow/AdminDownloadSignups';
 import ChangePasswordForm from './components/mainFlow/ChangePasswordForm';
 import Booking from './components/mainFlow/Booking';
 import BookingForm from './components/mainFlow/BookingForm';
+import TabIcon from './components/mainFlow/TabIcon';
+
+import {
+    ANNOUNCEMENTS_TITLE,
+    PROFILE_TITLE,
+    BOOKING_TITLE,
+    BUZZ_TITLE
+} from './actions/types';
+
 
 const RouterComponent = () => {
     return (
@@ -29,23 +38,27 @@ const RouterComponent = () => {
                         <Scene 
                             key='profile'
                             component={Profile}
-                            title='My Profile'
+                            title={PROFILE_TITLE}
+                            icon={TabIcon}
                         />
                         <Scene 
                             key='announcements'
                             component={Announcements}
-                            title='Announcements'
+                            title={ANNOUNCEMENTS_TITLE}
+                            icon={TabIcon}
                             initial
                         />
                         <Scene 
                             key='buzz'
                             component={Buzz}
-                            title='Buzz'
+                            title={BUZZ_TITLE}
+                            icon={TabIcon}
                         />
                         <Scene 
                             key='booking'
                             component={Booking}
-                            title='Booking'
+                            title={BOOKING_TITLE}
+                            icon={TabIcon}
                         />
                     </Tabs>
                     <Scene 

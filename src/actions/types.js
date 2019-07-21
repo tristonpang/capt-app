@@ -27,3 +27,8 @@ export const THEME_ROOMS = 'Theme Rooms';
 export const MPSH = 'MPSH';
 export const FLYING_SEED = 'Flying Seed';
 export const SEMINAR_ROOMS = 'Seminar Rooms';
+
+export const ANNOUNCEMENTS_TITLE = 'Announcements';
+export const PROFILE_TITLE = 'My Profile';
+export const BUZZ_TITLE = 'Buzz';
+export const BOOKING_TITLE = 'Booking';
