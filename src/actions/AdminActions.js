@@ -48,14 +48,14 @@ export const adminUpdate = ({ prop, value }) => {
     };
 };
 
-export const adminCreate = ({ title, description, isEvent, isActive, imgSrc, dateTime, venue }) => {
+export const adminCreate = ({ title, description, isEvent, isActive, imgSrc, dateTime, venue, isBuzz }) => {
     const { currentUser } = firebase.auth();
     const parsedTitle = parseTitle(title);
 
     if (!imgSrc) {
         const updates = {
             [`adminAnnouncements/${currentUser.uid}/${parsedTitle}`]: true,
-            [`announcements/${parsedTitle}`]: { title, description, isEvent, isActive, dateTime, venue }
+            [`announcements/${parsedTitle}`]: { title, description, isEvent, isActive, dateTime, venue, isBuzz }
         };
         return () => {
             firebase.database().ref().update(updates)
@@ -95,7 +95,7 @@ export const adminCreate = ({ title, description, isEvent, isActive, imgSrc, dat
                 console.log(url);
                 const updates = {
                     [`adminAnnouncements/${currentUser.uid}/${parsedTitle}`]: true,
-                    [`announcements/${parsedTitle}`]: { title, description, isEvent, isActive, url, dateTime, venue }
+                    [`announcements/${parsedTitle}`]: { title, description, isEvent, isActive, url, dateTime, venue, isBuzz }
                 };
                 //store url into database
                 firebase.database().ref().update(updates);

@@ -37,7 +37,7 @@ const styles = {
         fontSize: 18,
         textAlign: 'center',
         lineHeight: 40,
-        color: '#fff'
+        color: '#000'
     },
     containerStyle: {
         backgroundColor: 'rgba(0, 0, 0, 0.75)',

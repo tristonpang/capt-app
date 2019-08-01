@@ -10,7 +10,8 @@ import {
     CHANGE_PASSWORD_START_LOADING,
     CHANGE_PASSWORD_END_LOADING,
     BOOKING_FORM_UPDATE,
-    BOOKING_FORM_RESET
+    BOOKING_FORM_RESET,
+    BUZZ_LIST_FETCH_SUCCESS
 } from '../actions/types';
 
 const retrieveRoomIdFromEmail = (email) => {
@@ -38,7 +39,7 @@ export const announcementsListFetch = () => {
                                 };
                             });
                         const filteredAnnouncements = _.filter(currentAnnouncements, 
-                            (item) => item);
+                            (item) => item && !item.isBuzz);
                         //console.log(currentAnnouncements);
                         dispatch({ 
                             type: ANNOUNCEMENTS_LIST_FETCH_SUCCESS,
@@ -166,4 +167,36 @@ export const bookingFormUpdate = ({ prop, value }) => {
 
 export const bookingFormReset = () => {
     return { type: BOOKING_FORM_RESET };
+};
+
+export const buzzListFetch = () => {
+    const { currentUser } = firebase.auth();
+    const roomId = retrieveRoomIdFromEmail(currentUser.email);
+
+    return (dispatch) => {
+        firebase.database().ref('/announcements')
+            .on('value', annSnapshot => {
+                firebase.database().ref(`userSignups/${roomId}/`)
+                    .on('value', signupSnapshot => {
+                        const userSignups = signupSnapshot.val() ? signupSnapshot.val() : {};
+                        const currentAnnouncements = _.map(annSnapshot.val(), 
+                            (val, key) => {
+                                return { 
+                                    ...val, 
+                                    isUserSignedUp: userSignups[key], 
+                                    key 
+                                };
+                            });
+                        const filteredAnnouncements = _.filter(currentAnnouncements, 
+                            (item) => item && item.isBuzz);
+                        //console.log(currentAnnouncements);
+                        dispatch({ 
+                            type: BUZZ_LIST_FETCH_SUCCESS,
+                            payload: filteredAnnouncements
+                        });
+                    });
+
+                
+            });
+    };
 };

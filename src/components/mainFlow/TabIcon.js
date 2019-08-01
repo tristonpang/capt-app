@@ -9,16 +9,22 @@ import {
 
 const TabIcon = (props) => {
     if (props.title === ANNOUNCEMENTS_TITLE) {
-        return <Image source={require('../../resources/announcements.png')} />;
+        return <Image source={require('../../resources/announcements.png')} style={styles.iconStyle} />;
     }
     if (props.title === PROFILE_TITLE) {
-        return <Image source={require('../../resources/profile.png')} />;
+        return <Image source={require('../../resources/profile.png')} style={styles.iconStyle} />;
     }
     if (props.title === BOOKING_TITLE) {
-        return <Image source={require('../../resources/booking.png')} />;
+        return <Image source={require('../../resources/booking.png')} style={styles.iconStyle} />;
     }
     if (props.title === BUZZ_TITLE) {
-        return <Image source={require('../../resources/buzz.png')} />;
+        return <Image source={require('../../resources/buzz.png')} style={styles.iconStyle} />;
+    }
+};
+
+const styles = {
+    iconStyle: {
+        marginTop: 5
     }
 };
 

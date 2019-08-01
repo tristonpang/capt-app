@@ -9,6 +9,7 @@ import AdminSignupsReducer from './AdminSignupsReducer';
 import AdminDownloadSignupsReducer from '../actions/AdminDownloadSignupsReducer';
 import ChangePasswordReducer from './ChangePasswordReducer';
 import BookingFormReducer from './BookingFormReducer';
+import BuzzReducer from './BuzzReducer';
 
 export default combineReducers({
     auth: AuthReducer,
@@ -20,5 +21,6 @@ export default combineReducers({
     adminSignups: AdminSignupsReducer,
     adminDownloadSignups: AdminDownloadSignupsReducer,
     changePasswordForm: ChangePasswordReducer,
-    bookingForm: BookingFormReducer
+    bookingForm: BookingFormReducer,
+    buzz: BuzzReducer
 });

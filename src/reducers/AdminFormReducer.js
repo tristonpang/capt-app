@@ -10,7 +10,8 @@ const INITIAL_STATE = {
     imgSrc: {}, //this is used for displaying preview pictures before uploading
     url: '', //this is used for fetching pictures from the server
     dateTime: '',
-    venue: ''
+    venue: '',
+    isBuzz: false
 };
 
 export default (state = INITIAL_STATE, action) => {

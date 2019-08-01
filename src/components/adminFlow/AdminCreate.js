@@ -8,6 +8,7 @@ import { adminUpdate, adminCreate } from '../../actions';
 class AdminCreate extends Component {
     componentDidMount() {
         //reset form to empty
+        // TODO: refactor into single action call
         this.props.adminUpdate({ prop: 'title', value: '' });
         this.props.adminUpdate({ prop: 'description', value: '' });
         this.props.adminUpdate({ prop: 'isEvent', value: false });
@@ -15,12 +16,13 @@ class AdminCreate extends Component {
         this.props.adminUpdate({ prop: 'imgSrc', value: null }); // empty object {} is not falsy, we have to set to null for form to be empty
         this.props.adminUpdate({ prop: 'dateTime', value: '' });
         this.props.adminUpdate({ prop: 'venue', value: '' });
+        this.props.adminUpdate({ prop: 'isBuzz', value: false });
     }
 
     onButtonPress() {
-        const { title, description, isEvent, isActive, imgSrc, dateTime, venue } = this.props;
+        const { title, description, isEvent, isActive, imgSrc, dateTime, venue, isBuzz } = this.props;
 
-        this.props.adminCreate({ title, description, isEvent, isActive, imgSrc, dateTime, venue });
+        this.props.adminCreate({ title, description, isEvent, isActive, imgSrc, dateTime, venue, isBuzz });
     }
 
     onImageButtonPress() {
@@ -120,6 +122,16 @@ class AdminCreate extends Component {
                             }}
                         />
                     </CardSection>
+                    
+                    <CardSection>
+                        <ToggleInput
+                            label='Buzz Article' 
+                            value={this.props.isBuzz}
+                            onValueChange={() => {
+                                this.props.adminUpdate({ prop: 'isBuzz', value: !(this.props.isBuzz) });
+                            }}
+                        />
+                    </CardSection>
 
                     <CardSection>
                         {this.renderImageSelection()}
@@ -156,9 +168,9 @@ const styles = {
 };
 
 export const mapStateToProps = (state) => {
-    const { title, description, isEvent, isActive, imgSrc, dateTime, venue } = state.adminForm;
+    const { title, description, isEvent, isActive, imgSrc, dateTime, venue, isBuzz } = state.adminForm;
 
-    return { title, description, isEvent, isActive, imgSrc, dateTime, venue };
+    return { title, description, isEvent, isActive, imgSrc, dateTime, venue, isBuzz };
 };
 
 export default connect(mapStateToProps, { adminUpdate, adminCreate })(AdminCreate);
