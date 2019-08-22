@@ -9,7 +9,7 @@ import {
 } from "./types";
 
 const EMAIL_ADD_ON = "@capt.app";
-const ADMIN_PREFIX = "admin";
+const ADMIN_PREFIX = "csscrubs";
 
 export const usernameChanged = text => {
   return {
