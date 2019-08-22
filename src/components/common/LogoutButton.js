@@ -8,8 +8,10 @@ const LogoutButton = () => {
     <CardSection>
       <Button
         onPress={() => {
-          firebase.auth().signOut();
-          Actions.auth();
+          firebase
+            .auth()
+            .signOut()
+            .then(() => Actions.auth());
         }}
       >
         Logout
