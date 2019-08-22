@@ -7,3 +7,4 @@ export * from "./Spinner";
 export * from "./Confirm";
 export * from "./ToggleInput";
 export * from "./CancelButton";
+export * from "./LogoutButton";

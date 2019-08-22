@@ -3,7 +3,7 @@ import { Text } from "react-native";
 import { connect } from "react-redux";
 import { Actions } from "react-native-router-flux";
 import QRCode from "react-native-qrcode";
-import { Card, CardSection, Button } from "../common";
+import { Card, CardSection, Button, LogoutButton } from "../common";
 import { prepareProfileData } from "../../actions";
 
 class Profile extends Component {
@@ -49,6 +49,7 @@ class Profile extends Component {
             Change Password
           </Button>
         </CardSection>
+        <LogoutButton />
       </Card>
     );
   }

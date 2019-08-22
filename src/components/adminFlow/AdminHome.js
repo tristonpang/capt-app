@@ -4,6 +4,7 @@ import { FlatList, View } from "react-native";
 import _ from "lodash";
 import { adminListFetch } from "../../actions";
 import AdminListItem from "./AdminListItem";
+import { LogoutButton } from "../common";
 
 class AdminHome extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class AdminHome extends Component {
             return announcement.title.toString();
           }}
         />
+        <LogoutButton />
       </View>
     );
   }
