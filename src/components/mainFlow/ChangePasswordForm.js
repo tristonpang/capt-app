@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text } from "react-native";
 import { connect } from "react-redux";
 import { Input, Card, CardSection, Button, Spinner } from "../common";
 import { changePasswordFormUpdate, attemptChangePassword } from "../../actions";
@@ -49,53 +49,51 @@ class ChangePasswordForm extends Component {
 
   render() {
     return (
-      <SafeAreaView>
-        <Card>
-          <CardSection>
-            <Input
-              label="Old Password"
-              placeholder="old password"
-              onChangeText={text =>
-                this.props.changePasswordFormUpdate({
-                  prop: "oldPassword",
-                  value: text
-                })
-              }
-              value={this.props.oldPassword}
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="New Password"
-              placeholder="new password"
-              onChangeText={text =>
-                this.props.changePasswordFormUpdate({
-                  prop: "newPassword",
-                  value: text
-                })
-              }
-              value={this.props.newPassword}
-            />
-          </CardSection>
-          <CardSection>
-            <Input
-              label="Retype New Password"
-              placeholder="retype new password"
-              onChangeText={text =>
-                this.props.changePasswordFormUpdate({
-                  prop: "confirmNewPassword",
-                  value: text
-                })
-              }
-              value={this.props.confirmNewPassword}
-            />
-          </CardSection>
+      <Card>
+        <CardSection>
+          <Input
+            label="Old Password"
+            placeholder="old password"
+            onChangeText={text =>
+              this.props.changePasswordFormUpdate({
+                prop: "oldPassword",
+                value: text
+              })
+            }
+            value={this.props.oldPassword}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="New Password"
+            placeholder="new password"
+            onChangeText={text =>
+              this.props.changePasswordFormUpdate({
+                prop: "newPassword",
+                value: text
+              })
+            }
+            value={this.props.newPassword}
+          />
+        </CardSection>
+        <CardSection>
+          <Input
+            label="Retype New Password"
+            placeholder="retype new password"
+            onChangeText={text =>
+              this.props.changePasswordFormUpdate({
+                prop: "confirmNewPassword",
+                value: text
+              })
+            }
+            value={this.props.confirmNewPassword}
+          />
+        </CardSection>
 
-          {this.renderError()}
+        {this.renderError()}
 
-          <CardSection>{this.renderChangePasswordButton()}</CardSection>
-        </Card>
-      </SafeAreaView>
+        <CardSection>{this.renderChangePasswordButton()}</CardSection>
+      </Card>
     );
   }
 }

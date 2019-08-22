@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, Image, Text, SafeAreaView } from "react-native";
+import { ScrollView, Image, Text } from "react-native";
 import { connect } from "react-redux";
 import { Card, CardSection, Button } from "../common";
 import { signupForEvent, withdrawFromEvent } from "../../actions";
@@ -54,27 +54,25 @@ class MainDetail extends Component {
       descriptionStyle
     } = styles;
     return (
-      <SafeAreaView>
-        <ScrollView>
-          <Card>
-            <CardSection>
-              <Image source={{ uri: url }} style={imageStyle} />
-            </CardSection>
+      <ScrollView>
+        <Card>
+          <CardSection>
+            <Image source={{ uri: url }} style={imageStyle} />
+          </CardSection>
 
-            <CardSection style={titleDetailsStyle}>
-              <Text style={titleStyle}>{title}</Text>
-              <Text>{dateTime}</Text>
-              <Text>{venue}</Text>
-            </CardSection>
+          <CardSection style={titleDetailsStyle}>
+            <Text style={titleStyle}>{title}</Text>
+            <Text>{dateTime}</Text>
+            <Text>{venue}</Text>
+          </CardSection>
 
-            {this.renderSignupButton()}
+          {this.renderSignupButton()}
 
-            <CardSection>
-              <Text style={descriptionStyle}>{description}</Text>
-            </CardSection>
-          </Card>
-        </ScrollView>
-      </SafeAreaView>
+          <CardSection>
+            <Text style={descriptionStyle}>{description}</Text>
+          </CardSection>
+        </Card>
+      </ScrollView>
     );
   }
 }

@@ -4,8 +4,6 @@ import { FlatList, View } from "react-native";
 import _ from "lodash";
 import { adminListFetch } from "../../actions";
 import AdminListItem from "./AdminListItem";
-import Button from "../common/Button";
-import CardSection from "../common/CardSection";
 
 class AdminHome extends Component {
   componentDidMount() {
@@ -15,8 +13,6 @@ class AdminHome extends Component {
   renderItem(announcement) {
     return <AdminListItem announcement={announcement} />;
   }
-
-  onLogOutButtonPress() {}
 
   render() {
     return (
@@ -31,11 +27,6 @@ class AdminHome extends Component {
             return announcement.title.toString();
           }}
         />
-        <CardSection>
-          <Button onButtonPress={() => this.onLogOutButtonPress.bind(this)}>
-            Log Out
-          </Button>
-        </CardSection>
       </View>
     );
   }

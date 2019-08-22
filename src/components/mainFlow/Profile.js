@@ -1,83 +1,86 @@
-import React, { Component } from 'react';
-import { Text } from 'react-native';
-import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import QRCode from 'react-native-qrcode';
-import { Card, CardSection, Button } from '../common';
-import { prepareProfileData } from '../../actions';
+import React, { Component } from "react";
+import { Text } from "react-native";
+import { connect } from "react-redux";
+import { Actions } from "react-native-router-flux";
+import QRCode from "react-native-qrcode";
+import { Card, CardSection, Button } from "../common";
+import { prepareProfileData } from "../../actions";
 
 class Profile extends Component {
-    componentDidMount() {
-        this.props.prepareProfileData();
-    }
+  componentDidMount() {
+    this.props.prepareProfileData();
+  }
 
-    onSignupsButtonPress() {
-        Actions.userSignupsList();
-    }
+  onSignupsButtonPress() {
+    Actions.userSignupsList();
+  }
 
-    onChangePasswordButtonPress() {
-        Actions.changePasswordForm();
-    }
+  onChangePasswordButtonPress() {
+    Actions.changePasswordForm();
+  }
 
-    render() {
-        const { 
-            containerStyle, 
-            labelTextStyle, 
-            idTextStyle 
-        } = styles;
+  render() {
+    const { containerStyle, labelTextStyle, idTextStyle } = styles;
 
-        return (
-            <Card>
-                <CardSection style={containerStyle}>
-                    <QRCode
-                        value={this.props.qrCode}
-                        size={200}
-                        bgColor='purple'
-                        fgColor='white'
-                    />
-                </CardSection>
-                
-                <CardSection style={containerStyle}>
-                    <Text style={labelTextStyle}>Room ID</Text>
-                    <Text style={idTextStyle}>{this.props.roomId}</Text>
-                </CardSection>
-                
-                <CardSection>
-                    <Button onPress={this.onSignupsButtonPress.bind(this)}>Manage my Signed Up Events</Button>
-                </CardSection>
+    return (
+      <Card>
+        <CardSection style={containerStyle}>
+          <QRCode
+            value={this.props.qrCode}
+            size={200}
+            bgColor="purple"
+            fgColor="white"
+          />
+        </CardSection>
 
-                <CardSection>
-                    <Button onPress={this.onChangePasswordButtonPress.bind(this)}>Change Password</Button>
-                </CardSection>
-            </Card>
-        );
-    }
+        <CardSection style={containerStyle}>
+          <Text style={labelTextStyle}>Room ID</Text>
+          <Text style={idTextStyle}>{this.props.roomId}</Text>
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onSignupsButtonPress.bind(this)}>
+            Manage my Signed Up Events
+          </Button>
+        </CardSection>
+
+        <CardSection>
+          <Button onPress={this.onChangePasswordButtonPress.bind(this)}>
+            Change Password
+          </Button>
+        </CardSection>
+      </Card>
+    );
+  }
 }
 
 const styles = {
-    containerStyle: {
-        borderBottomWidth: 1,
-        padding: 5,
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-        borderColor: '#ddd',
-        position: 'relative'
-    },
-    labelTextStyle: {
-        fontSize: 16
-    },
-    idTextStyle: {
-        fontSize: 28,
-        fontWeight: 'bold'
-    }
+  containerStyle: {
+    borderBottomWidth: 1,
+    padding: 5,
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    borderColor: "#ddd",
+    position: "relative"
+  },
+  labelTextStyle: {
+    fontSize: 16
+  },
+  idTextStyle: {
+    fontSize: 28,
+    fontWeight: "bold"
+  }
 };
 
-const mapStateToProps = (state) => {
-    const { roomId, qrCode } = state.profile;
+const mapStateToProps = state => {
+  const { roomId, qrCode } = state.profile;
 
-    return { roomId, qrCode };
+  return { roomId, qrCode };
 };
 
-export default connect(mapStateToProps, { prepareProfileData })(Profile);
+export default connect(
+  mapStateToProps,
+  { prepareProfileData }
+)(Profile);
