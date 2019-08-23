@@ -1,6 +1,6 @@
 import React from "react";
-import { TextInput, View, Text } from "react-native";
-import { Item, Label, Input } from 'native-base';
+import { View } from "react-native";
+import { Item, Label, Input } from "native-base";
 
 const StackInput = ({
   label,
@@ -9,11 +9,11 @@ const StackInput = ({
   placeholder,
   secureTextEntry,
   autoCapitalize
-  }) => {
+}) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
   return (
     <View style={containerStyle}>
-      <Item stackedLabel>
+      <Item stackedLabel style={{ justifyContent: "space-around" }}>
         <Label style={labelStyle}>{label}</Label>
         <Input
           secureTextEntry={secureTextEntry}
@@ -44,13 +44,13 @@ const styles = {
     color: "#000",
     fontSize: 18,
     paddingLeft: 5,
-    flex: 1//proportion of amount of space to be filled in parent container
+    flex: 1 //proportion of amount of space to be filled in parent container
   },
   containerStyle: {
     height: 60,
     flex: 1,
     paddingLeft: 5,
-    paddingRight: 5,
+    paddingRight: 5
   }
 };
 
