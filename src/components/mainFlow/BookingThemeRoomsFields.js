@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Picker, Text } from "react-native";
 import { connect } from "react-redux";
-import { CardSection, Input } from "../common";
+import { CardSection, StackInput } from "../common";
 import { bookingFormUpdate } from "../../actions";
 
 class BookingThemeRoomFields extends Component {
@@ -22,7 +22,7 @@ class BookingThemeRoomFields extends Component {
           </Picker>
         </CardSection>
         <CardSection>
-          <Input
+          <StackInput
             label="TR2-trained CAPTain"
             placeholder="Name & House, otherwise NA"
             onChangeText={text =>
@@ -48,7 +48,7 @@ const mapStateToProps = state => {
 const styles = {
   pickerLabelStyle: {
     fontSize: 18,
-    paddingLeft: 20
+    paddingLeft: 10
   }
 };
 

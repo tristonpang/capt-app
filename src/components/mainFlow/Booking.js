@@ -15,7 +15,7 @@ class Booking extends Component {
     return (
       <ScrollView>
         <TouchableOpacity
-          onPress={() => Actions.bookingForm({ bookingType: "theme_rooms" })}
+          onPress={() => Actions.bookingForm({ bookingType: THEME_ROOMS })}
         >
           <Card>
             <CardSection style={titleContainerStyle}>

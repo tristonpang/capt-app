@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Picker, Text } from "react-native";
 import { connect } from "react-redux";
-import { CardSection, Input } from "../common";
+import { CardSection, StackInput } from "../common";
 import { bookingFormUpdate } from "../../actions";
 
 class BookingSeminarRoomsFields extends Component {
@@ -29,7 +29,7 @@ class BookingSeminarRoomsFields extends Component {
           </Picker>
         </CardSection>
         <CardSection>
-          <Input
+          <StackInput
             label="Number of Participants"
             placeholder="0"
             onChangeText={text =>
@@ -49,7 +49,7 @@ class BookingSeminarRoomsFields extends Component {
 const styles = {
   pickerLabelStyle: {
     fontSize: 18,
-    paddingLeft: 20
+    paddingLeft: 10
   }
 };
 

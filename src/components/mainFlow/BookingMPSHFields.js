@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Picker, Text } from "react-native";
 import { connect } from "react-redux";
-import { CardSection, Input } from "../common";
+import { CardSection, Input, StackInput } from "../common";
 import { bookingFormUpdate } from "../../actions";
 
 class BookingMPSHFields extends Component {
@@ -9,8 +9,8 @@ class BookingMPSHFields extends Component {
     return (
       <View>
         <CardSection>
-          <Input
-            label="Matric Number"
+          <StackInput
+            label="Matric No."
             placeholder="A1234567X"
             onChangeText={text =>
               this.props.bookingFormUpdate({
@@ -22,7 +22,7 @@ class BookingMPSHFields extends Component {
           />
         </CardSection>
         <CardSection>
-          <Input
+          <StackInput
             label="Number of CAPTains"
             placeholder="0"
             onChangeText={text =>
@@ -35,7 +35,7 @@ class BookingMPSHFields extends Component {
           />
         </CardSection>
         <CardSection>
-          <Input
+          <StackInput
             label="Number of non-CAPTains"
             placeholder="0"
             onChangeText={text =>
@@ -47,7 +47,7 @@ class BookingMPSHFields extends Component {
             value={this.props.mpshNumberOfNonCaptains}
           />
         </CardSection>
-        <CardSection style={{ flexDirection: "column" }}>
+        <CardSection style={{ flexDirection: "column", justifyContent: 'flex-start', }}>
           <Text style={styles.pickerLabelStyle}>Courts Needed</Text>
           <Picker
             selectedValue={this.props.mpshCourtsNeeded}
@@ -64,7 +64,7 @@ class BookingMPSHFields extends Component {
           </Picker>
         </CardSection>
         <CardSection>
-          <Input
+          <StackInput
             label="Sports Equipment Required"
             placeholder="NA if none"
             onChangeText={text =>
@@ -84,7 +84,7 @@ class BookingMPSHFields extends Component {
 const styles = {
   pickerLabelStyle: {
     fontSize: 18,
-    paddingLeft: 20
+    paddingLeft: 10
   }
 };
 

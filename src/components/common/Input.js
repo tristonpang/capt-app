@@ -8,9 +8,8 @@ const Input = ({
   placeholder,
   secureTextEntry,
   autoCapitalize
-}) => {
+  }) => {
   const { inputStyle, labelStyle, containerStyle } = styles;
-
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>{label}</Text>
@@ -39,7 +38,8 @@ const styles = {
   labelStyle: {
     fontSize: 18,
     paddingLeft: 20,
-    flex: 1 //proportion of amount of space to be filled in parent container
+    flex: 1,
+    width: 0//proportion of amount of space to be filled in parent container
   },
   containerStyle: {
     height: 40,

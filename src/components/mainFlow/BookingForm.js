@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { ScrollView } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { email } from "react-native-communications";
-import { Input, Card, CardSection, Button } from "../common";
+import { Input, Card, CardSection, Button, StackInput } from "../common";
 import { bookingFormUpdate, bookingFormReset } from "../../actions";
 import {
   THEME_ROOMS,
@@ -130,7 +130,7 @@ class BookingForm extends Component {
       <ScrollView>
         <Card>
           <CardSection>
-            <Input
+            <StackInput
               label="Name"
               placeholder="John Doe"
               onChangeText={text =>
@@ -143,8 +143,8 @@ class BookingForm extends Component {
             />
           </CardSection>
           <CardSection>
-            <Input
-              label="Phone Number"
+            <StackInput
+              label="Mobile No."
               placeholder="9876 1234"
               onChangeText={text =>
                 this.props.bookingFormUpdate({
@@ -177,9 +177,14 @@ class BookingForm extends Component {
           {this.renderSpecificFields()}
 
           <CardSection>
-            <Input
-              label="Description of Activities"
-              placeholder="description"
+            <StackInput
+              label="Description of Activity"
+              placeholder="Description"
+              multiline={true}
+              containerStyle={{    height: 150,
+                                   flex: 1,
+                                   paddingLeft: 5,
+                                   paddingRight: 5,}}
               onChangeText={text =>
                 this.props.bookingFormUpdate({
                   prop: "description",

@@ -8,3 +8,4 @@ export * from "./Confirm";
 export * from "./ToggleInput";
 export * from "./CancelButton";
 export * from "./LogoutButton";
+export * from "./StackInput";

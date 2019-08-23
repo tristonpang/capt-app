@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
-import { CardSection, Input } from "../common";
+import { CardSection, StackInput } from "../common";
 import { bookingFormUpdate } from "../../actions";
 
 class BookingFlyingSeedFields extends Component {
@@ -9,7 +9,7 @@ class BookingFlyingSeedFields extends Component {
     return (
       <View>
         <CardSection>
-          <Input
+          <StackInput
             label="Number of Participants"
             placeholder="0"
             onChangeText={text =>
