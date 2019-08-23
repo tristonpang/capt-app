@@ -11,7 +11,7 @@ const LogoutButton = () => {
           firebase
             .auth()
             .signOut()
-            .then(() => Actions.auth());
+            .then(() => Actions.popTo("login"));
         }}
       >
         Logout
